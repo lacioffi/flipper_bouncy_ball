@@ -1,4 +1,4 @@
-# flipper_bouncy_ball
+# Flipper Zero App - Bouncy Ball
 A basic app for Flipper Zero with a ball that bounces around a box.
 
 ![image](https://github.com/user-attachments/assets/32ee2ebd-dc8a-45f1-a5b5-bab251b9d97d)
