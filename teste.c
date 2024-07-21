@@ -1,4 +1,6 @@
 #include <furi.h>
+#include <furi_hal.h>
+#include <notification/notification.h>
 #include <gui/gui.h>
 #include <bouncy_icons.h>
 
@@ -40,6 +42,16 @@ static void timer_callback(void* ctx) {
 
 int random_range(int min, int max) {
     return min + rand() / (RAND_MAX / (max - min + 1) + 1);
+}
+
+void beep() {
+    if(furi_hal_speaker_acquire(500)) {
+        float frequency = 100.0 + ((float)rand() / (float)(RAND_MAX / 450.0));
+        furi_hal_speaker_start(frequency, 0.3);
+        furi_delay_ms(50);
+        furi_hal_speaker_stop();
+        furi_hal_speaker_release();
+    }
 }
 
 int32_t
@@ -124,21 +136,25 @@ int32_t
             if(status.ball_x >= 124.0) {
                 status.ball_x = 124.0;
                 status.ball_speed_x = -(status.ball_speed_x);
+                beep();
             }
 
             if(status.ball_x <= 3.0) {
                 status.ball_x = 3.0;
                 status.ball_speed_x = -(status.ball_speed_x);
+                beep();
             }
 
             if(status.ball_y >= 60.0) {
                 status.ball_y = 60.0;
                 status.ball_speed_y = -(status.ball_speed_y);
+                beep();
             }
 
             if(status.ball_y <= 3.0) {
                 status.ball_y = 3.0;
                 status.ball_speed_y = -(status.ball_speed_y);
+                beep();
             }
 
             view_port_update(view_port);
